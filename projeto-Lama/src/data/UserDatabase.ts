@@ -13,7 +13,8 @@ export class UserDatabase extends BaseDatabase {
     role: string
   ): Promise<void> {
     try {
-      await this.getConnection()
+      console.log(UserDatabase.TABLE_NAME)
+      await this.connection(UserDatabase.TABLE_NAME)
         .insert({
           id,
           email,
@@ -21,20 +22,16 @@ export class UserDatabase extends BaseDatabase {
           password,
           role
         })
-        .into(UserDatabase.TABLE_NAME)
-    } catch (error) {
-      if (error instanceof Error) {
-        throw new Error(error.message)
-    } else {
-        throw new Error("Erro do banco!")
-    }
+    } catch (error: any) {
+
+      throw new Error(error.sqlMessage || error.message)
+
     }
   }
 
   public async getUserByEmail(email: string): Promise<User> {
-    const result = await this.getConnection()
+    const result = await this.connection(UserDatabase.TABLE_NAME)
       .select("*")
-      .from(UserDatabase.TABLE_NAME)
       .where({ email });
 
     return User.toUserModel(result[0]);

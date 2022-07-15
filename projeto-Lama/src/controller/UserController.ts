@@ -27,7 +27,7 @@ export class UserController {
             }
         }
 
-        await BaseDatabase.destroyConnection()
+        
     }
 
     async login(req: Request, res: Response) {
@@ -52,7 +52,7 @@ export class UserController {
             }
         }
 
-        await BaseDatabase.destroyConnection()
+        
     }
 
 }

@@ -33,7 +33,7 @@ export class ShowsController {
                 throw new Error("Erro do banco!")
             }
         }
-        await BaseDatabase.destroyConnection()
+        
     }
     findShow = async(
         req: Request,
@@ -55,6 +55,6 @@ export class ShowsController {
                 throw new Error("Erro do banco!")
             }
         }
-        await BaseDatabase.destroyConnection()
+        
     }
 }

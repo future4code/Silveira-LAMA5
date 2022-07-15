@@ -12,14 +12,14 @@ export class BandDatabase extends BaseDatabase {
     responsible: string
   ): Promise<void> {
     try {
-      await this.getConnection()
+      await this.connection(BandDatabase.TABLE_NAME)
         .insert({
           id,
           name,
           music_genre,
           responsible
         })
-        .into(BandDatabase.TABLE_NAME)
+        
     } catch (error) {
       if (error instanceof Error) {
         throw new Error(error.message)
@@ -30,9 +30,8 @@ export class BandDatabase extends BaseDatabase {
   }
 
   public async getBandByName(name: string): Promise<Band> {
-    const result = await this.getConnection()
+    const result = await this.connection(BandDatabase.TABLE_NAME)
       .select("*")
-      .from(BandDatabase.TABLE_NAME)
       .where({ name });
 
     return result[0];

@@ -8,7 +8,7 @@ export class ShowsDatabase extends BaseDatabase {
         shows: Shows
     ) => {
         try{
-            await this.getConnection()
+            await this.connection()
             .insert({
                 id: shows.getId(),
                 week_day: shows.getWeekDay(),
@@ -27,7 +27,7 @@ export class ShowsDatabase extends BaseDatabase {
     }
 
     public getShows = async(week_day: string, start_time: number) => {
-        const result = await this.getConnection()
+        const result = await this.connection()
         .select("*")
         .from(ShowsDatabase.TABLE_NAME)
         .where({
@@ -38,7 +38,7 @@ export class ShowsDatabase extends BaseDatabase {
     }
 
     public getShowsByWeekDay = async(week_day: string)=> {
-        const result = await this.getConnection()
+        const result = await this.connection()
         .select("NOME_TABELA_BANDAS.name", "NOME_TABELA_BANDAS.music_genre")
         .from(ShowsDatabase.TABLE_NAME)
         .join(

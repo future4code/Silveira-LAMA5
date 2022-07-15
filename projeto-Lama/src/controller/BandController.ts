@@ -30,7 +30,7 @@ export class BandController {
             }
         }
 
-        await BaseDatabase.destroyConnection();
+        
     }
 
     async findBand(req: Request, res: Response) {
@@ -54,6 +54,6 @@ export class BandController {
             }
         }
 
-        await BaseDatabase.destroyConnection()
+       
     }
 }
